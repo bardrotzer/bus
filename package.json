@@ -1,0 +1,28 @@
+{
+  "name": "bus",
+  "version": "1.0.0",
+  "description": "Bus for writing to file system, sending mail and sms, listening to mail, sms",
+  "main": "index.js",
+  "repository": "git@github.com:bardrotzer/bus.git",
+  "author": "Bård Røtzer <bard@kartoteket.as>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "mailgun-js": "^0.22.0",
+    "messagebird": "^2.4.1",
+    "wilson": "^0.0.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "dotenv": "^7.0.0",
+    "nodemon": "^1.18.11"
+  }
+}
