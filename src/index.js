@@ -24,9 +24,9 @@ app.use((req, res, next) => {
   const secret = req.get('secret');
   if (secret === process.env.SECRET) {
     next();
-  } else if(req.body.recipient === process.env.ALLOWED_INCOMING && req.body.sender === process.env.ALLOWED_INCOMING && req.originalUrl === '/travellog') {
+  } else if(req.body.recipient === process.env.ALLOWED_INCOMING && req.body.sender === process.env.ALLOWED_SENDER && req.originalUrl === '/travellog') {
     next();
-} else {
+  } else {
     res.status(401).send({
       message: 'You need to authenticate, and are probaby not allowed to be here'
     });
