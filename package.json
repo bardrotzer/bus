@@ -21,7 +21,7 @@
     "lodash": "^4.17.11",
     "mailgun-js": "^0.22.0",
     "messagebird": "^2.4.1",
-    "wilson": "^0.0.5"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
