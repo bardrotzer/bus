@@ -20,6 +20,17 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use((req, res, next) => {
+  const secret = req.get('secret');
+  if (secret === process.env.SECRET) {
+    next();
+  } else {
+    res.status(401).send({
+      message: 'You need to authenticate, and are probaby not allowed to be here'
+    });
+  }
+})
+
 // use the router defined in routes/index,js
 app.use("/", router);
 
