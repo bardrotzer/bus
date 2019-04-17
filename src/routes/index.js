@@ -94,16 +94,25 @@ router.post('/sms/', (req, res) => {
     .then(data => wrapAndReturn(res, data))
     .catch(data => wrapAndReturnError(res, data));
 
-})
+});
 
-
+/**
+ * @typedef {Object} Contact
+ * @property {String} groupId - the group to add the user to
+ * @property {String} name - the name of the user to add
+ * @property {String} phone - the phone to add to the user
+ * 
+ * @param {Contact} req - The data passed on in the request
+ * 
+ * POST to send an sms
+ * @param {SmsBody} req
+ */
 router.post('/contacts/', (req, res) => {
 
   const smsController = new Sms();
   smsController.addContact(req.body)
     .then(data => wrapAndReturn(res, data))
     .catch(data => wrapAndReturnError(res, data));
-
-})
+});
 
 export default router;

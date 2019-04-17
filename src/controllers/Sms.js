@@ -89,6 +89,7 @@ export default class Sms {
    *  @property {Array|String} recipients - (optional) the id of the list of a real list of recipients (defaults to process.env.DEFAULT_SMS_LIST)
    * 
    *  @memberOf Sms
+   * 
    *  @function send
    *  @description Sends the message specified in this.message to the list or number's specifies
    *  @param {messagebody} data
@@ -130,18 +131,20 @@ export default class Sms {
 
   /**
    *  @memberOf Sms
+   * 
    *  @function addContact
    *  @description Adds a contact to the group specified, or to the default group
+   *  @param {Contact} contact - the contact to add
    *  @returns {Promise} a promise that resolves or fails if the user is added
    */
-  addContact(body) {
+  addContact(contact) {
     const contactsUrl = urls('mb_contacts');
-    const groupId = body.groupId || process.env.DEFAULT_SMS_LIST;
+    const groupId = contact.groupId || process.env.DEFAULT_SMS_LIST;
     const groupsUrl = urls('mb_group_contacts', groupId);
-    const name = isString(body.name) ? body.name.split(' ') : ['No Name'];
+    const name = isString(contact.name) ? contact.name.split(' ') : ['No Name'];
     // the object for the contact
     const contactObj = {
-      msisdn: body.phone,
+      msisdn: contact.phone,
       firstName: name[0],
       lastName: name[1] || ''
     }
