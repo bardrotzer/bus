@@ -24,10 +24,11 @@ export default class Sms {
   /**
    * @constructor
    * 
-   * @param {SMS} data - The data passed in the post 
+   * @param {Object} logger - The winston logger
    * 
    */
-  constructor(data) {
+  constructor(logger) {
+    this.logger = logger
     this.config = {
       headers: {
         "Content-Type": "application/json",
