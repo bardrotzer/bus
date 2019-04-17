@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "Bus for writing to file system, sending mail and sms, listening to mail, sms",
   "main": "index.js",
+  "scripts": {
+    "serve": "NODE_ENV=develop nodemon src/index.js --watch src --exec babel-node",
+    "build": "babel -d ./dist ./src",
+    "prebuild": "rm -rf dist/*",
+    "start": "NODE_ENV=production node ./dist/index.js",
+    "prestart": "yarn build"
+  },
   "repository": "git@github.com:bardrotzer/bus.git",
   "author": "Bård Røtzer <bard@kartoteket.as>",
   "license": "MIT",
