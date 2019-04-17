@@ -141,10 +141,10 @@ router.post('/appendFile/', (req, res) => {
  * Some special routes added here that is used to forward mail to a file writer uing mailguns forwarding
  */
 router.post('/travellog/', (req, res) => {
-  logger.log({
-    level: 'info',
-    message: req.body
-  });
+  const fileController = new FileController(logger);
+  fileController.travellog(req.body)
+    .then(data => wrapAndReturn(res, data))
+    .catch(data => wrapAndReturnError(res, data));
 })
 
 export default router;
