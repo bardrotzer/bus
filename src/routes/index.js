@@ -7,11 +7,13 @@
  *  @requires     NPM:lodash
  *  @requires     NPM:winston
  *  @requires     src/controllers/Sms.js
+ *  @requires     src/controllers/FileController.js
  */
 
 import express from 'express';
 import { isArray } from 'lodash';
 import Sms from '../controllers/Sms';
+import FileController from '@/controllers/FileController';
 import winston from 'winston';
 
 const logpath = process.env.LOG_PATH || './';
@@ -89,7 +91,7 @@ router.get('/', (req, res) => {
  */
 router.post('/sms/', (req, res) => {
 
-  const smsController = new Sms();
+  const smsController = new Sms(logger);
   smsController.send(req.body)
     .then(data => wrapAndReturn(res, data))
     .catch(data => wrapAndReturnError(res, data));
@@ -109,10 +111,40 @@ router.post('/sms/', (req, res) => {
  */
 router.post('/contacts/', (req, res) => {
 
-  const smsController = new Sms();
+  const smsController = new Sms(logger);
   smsController.addContact(req.body)
     .then(data => wrapAndReturn(res, data))
     .catch(data => wrapAndReturnError(res, data));
 });
+
+
+/**
+ * 
+ * @typedef {Object} FileInfo
+ * @property {String} filename - the name of the file, could be a full path, but i'd recommend against it
+ * @property {String} data - the data to add
+ * 
+ * @param {FileInfo} req - The data passed on in the request
+ * 
+ */
+router.post('/appendFile/', (req, res) => {
+
+  const fileController = new FileController(logger);
+  fileController.append(req.body)
+    .then(data => wrapAndReturn(res, data))
+    .catch(data => wrapAndReturnError(res, data));
+});
+
+
+/**
+ * 
+ * Some special routes added here that is used to forward mail to a file writer uing mailguns forwarding
+ */
+router.post('/travellog/', (req, res) => {
+  logger.log({
+    level: 'info',
+    message: req.body
+  });
+})
 
 export default router;
