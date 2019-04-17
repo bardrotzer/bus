@@ -3,3 +3,5 @@ yarn-error.log
 .env
 sms_combined.log
 sms_error.log
+dist/
+ecosystem.config.js
